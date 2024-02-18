@@ -65,7 +65,7 @@ $ conda create -n CONDA_ENV_NAME --clone /share/conda_envs/internlm-base
 ```
 
 - 如果clone操作过慢，可采用如下操作:
- 
+
 ```bash
 $ /root/share/install_conda_env_internlm_base.sh lmdeploy
 ```
@@ -843,6 +843,49 @@ lmdeploy serve gradio localhost:33337 \
 **基础作业：**
 
 - 使用 LMDeploy 以本地对话、网页Gradio、API服务中的一种方式部署 InternLM-Chat-7B 模型，生成 300 字的小故事（需截图）
+  在线转换：
+
+  ![image-20240218214034700](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218214034700.png)
+
+  离线转换：
+
+  ![image-20240218214005287](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218214005287.png)
+
+  本地离线调用：
+
+  ![image-20240218214447234](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218214447234.png)
+
+  api调用：
+
+  ```
+  lmdeploy serve api_server ./workspace \
+  	--server_name 0.0.0.0 \
+  	--server_port 23333 \
+  	--instance_num 64 \
+  	--tp 1
+  	
+  lmdeploy serve gradio http://0.0.0.0:6006 \
+  	--server_name 0.0.0.0 \
+  	--server_port 6006 \
+  	--restful_api True
+  ```
+
+
+![image-20240218221134214](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218221134214.png)![image-20240218220959909](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218220959909.png)
+
+web api:
+
+![image-20240218221320739](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218221320739.png)
+
+![image-20240218222555819](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218222555819.png)
+
+```
+cp /root/share/temp/datasets/c4/calib_dataloader.py  /root/.conda/envs/xtuner0.1.9/lib/python3.10/site-packages/lmdeploy/lite/utils/
+
+cp -r /root/share/temp/datasets/c4/ /root/.cache/huggingface/datasets/
+
+
+```
 
 **进阶作业（可选做）**
 

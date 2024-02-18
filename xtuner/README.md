@@ -732,9 +732,125 @@ nvidia-cuda-runtime-cu12      12.1.105
 **微调前**（回答比较官方）
 ![web_show_2.png](imgs%2Fweb_show_2.png)
 
-
 **微调后**（对自己的身份有了清晰的认知）
 ![web_show_1.png](imgs%2Fweb_show_1.png)
+
+![image-20240216080733953](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240216080733953.png)
+
+
+
+从0开始：
+
+```
+/root/share/install_conda_env_internlm_base.sh xtuner0.1.9
+
+# 激活环境
+conda activate xtuner0.1.9
+# 进入家目录 （~的意思是 “当前用户的home路径”）
+cd ~
+# 创建版本文件夹并进入，以跟随本教程
+mkdir xtuner019 && cd xtuner019
+
+# 拉取 0.1.9 的版本源码
+git clone -b v0.1.9  https://github.com/InternLM/xtuner
+# 无法访问github的用户请从 gitee 拉取:
+# git clone -b v0.1.9 https://gitee.com/Internlm/xtuner
+
+# 进入源码目录
+cd xtuner
+
+# 从源码安装 XTuner
+pip install -e '.[all]'
+
+# 创建一个微调 oasst1 数据集的工作路径，进入
+mkdir ~/ft-oasst1 && cd ~/ft-oasst1
+
+cd ~/ft-oasst1
+xtuner copy-cfg internlm_chat_7b_qlora_oasst1_e3 .
+
+ln -s /share/temp/model_repos/internlm-chat-7b ~/ft-oasst1/
+
+cd ~/ft-oasst1
+# ...-guanaco 后面有个空格和英文句号啊
+cp -r /root/share/temp/datasets/openassistant-guanaco .
+
+
+xtuner train ./internlm_chat_7b_qlora_oasst1_e3_copy.py
+```
+
+
+
+```
+# 部署
+export MKL_SERVICE_FORCE_INTEL=1
+
+# 配置文件存放的位置
+export CONFIG_NAME_OR_PATH=/root/ft-oasst1/internlm_chat_7b_qlora_oasst1_e3_mrcat.py
+
+# 模型训练后得到的pth格式参数存放的位置
+export PTH=/root/ft-oasst1/work_dirs/internlm_chat_7b_qlora_oasst1_e3_mrcat/epoch_3.pth
+
+# pth文件转换为Hugging Face格式后参数存放的位置
+export SAVE_PATH=/root/ft-oasst1/work_dirs/hf
+
+# 执行参数转换
+xtuner convert pth_to_hf $CONFIG_NAME_OR_PATH $PTH $SAVE_PATH
+```
+
+```
+export MKL_SERVICE_FORCE_INTEL=1
+export MKL_THREADING_LAYER='GNU'
+
+# 原始模型参数存放的位置
+export NAME_OR_PATH_TO_LLM=/root/ft-oasst1/internlm-chat-7b
+
+# Hugging Face格式参数存放的位置
+export NAME_OR_PATH_TO_ADAPTER=/root/ft-oasst1/work_dirs/hf
+
+# 最终Merge后的参数存放的位置
+mkdir /root/ft-oasst1/work_dirs/hf_merge
+export SAVE_PATH=/root/ft-oasst1/work_dirs/hf_merge
+
+# 执行参数Merge
+xtuner convert merge \
+    $NAME_OR_PATH_TO_LLM \
+    $NAME_OR_PATH_TO_ADAPTER \
+    $SAVE_PATH \
+    --max-shard-size 2GB
+```
+
+
+
+```
+# 进入源码目录
+cd /root/data/xtuner
+
+# 从源码安装 XTuner
+pip install -e '.[all]'
+
+mkdir /root/code/ft-oasst1
+
+cd /root/code/ft-oasst1
+
+xtuner copy-cfg internlm_chat_7b_qlora_oasst1_e3 .
+
+ln -s /share/temp/model_repos/internlm-chat-7b .
+
+cp -r /root/share/temp/datasets/openassistant-guanaco .
+
+xtuner train ./internlm_chat_7b_qlora_oasst1_e3_copy.py  --deepspeed deepspeed_zero2
+
+
+
+
+streamlit run /root/ft-oasst1/InternLM/web_demo.py --server.address 127.0.0.1 --server.port 6006
+```
+
+![image-20240216084259794](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240216084259794.png)
+
+![image-20240216084219742](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240216084219742.png)
+
+
 
 作业参考答案：https://github.com/InternLM/tutorial/blob/main/xtuner/self.md
 

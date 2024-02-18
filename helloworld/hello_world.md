@@ -1,6 +1,7 @@
-![](./images/head.png)
+![](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\head.png)
 
 # 轻松玩转书生·浦语大模型趣味 Demo
+
 - [轻松玩转书生·浦语大模型趣味 Demo](#轻松玩转书生浦语大模型趣味-demo)
   - [1 大模型及 InternLM 模型简介](#1-大模型及-internlm-模型简介)
     - [1.1 什么是大模型？](#11-什么是大模型)
@@ -50,7 +51,7 @@
 
 &emsp;&emsp;`Lagent` 是一个轻量级、开源的基于大语言模型的智能体（agent）框架，支持用户快速地将一个大语言模型转变为多种类型的智能体，并提供了一些典型工具为大语言模型赋能。通过 `Lagent` 框架可以更好的发挥 `InternLM` 的全部性能。
 
-![Lagent 框架图](./images/Lagent.png)
+![Lagent 框架图](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\Lagent.png)
 
 &emsp;&emsp;浦语·灵笔是基于书生·浦语大语言模型研发的视觉-语言大模型，提供出色的图文理解和创作能力，结合了视觉和语言的先进技术，能够实现图像到文本、文本到图像的双向转换。使用浦语·灵笔大模型可以轻松的创作一篇图文推文，也能够轻松识别一张图片中的物体，并生成对应的文本描述。
 
@@ -64,15 +65,15 @@
 
 在 [InternStudio](https://studio.intern-ai.org.cn/) 平台中选择 A100(1/4) 的配置，如下图所示镜像选择 `Cuda11.7-conda`，如下图所示：
 
-![Alt text](images/image.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image.png)
 
 接下来打开刚刚租用服务器的`进入开发机`，并且打开其中的终端开始环境配置、模型下载和运行 `demo`。
 
-![Alt text](images/image-1.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-1.png)
 
 进入开发机后，在页面的左上角可以切换 `JupyterLab`、`终端`和 `VScode`，并在终端输入 `bash` 命令，进入 `conda` 环境。如下图所示：
 
-![Alt text](images/image-11.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-11.png)
 
 进入 `conda` 环境之后，使用以下命令从本地克隆一个已有的 `pytorch 2.0.1` 的环境
 
@@ -99,6 +100,7 @@ pip install streamlit==1.24.0
 pip install sentencepiece==0.1.99
 pip install accelerate==0.24.1
 ```
+
 ### 2.2 模型下载
 
 [InternStudio](https://studio.intern-ai.org.cn/) 平台的 `share` 目录下已经为我们准备了全系列的 `InternLM` 模型，所以我们可以直接复制即可。使用如下命令复制：
@@ -107,6 +109,7 @@ pip install accelerate==0.24.1
 mkdir -p /root/model/Shanghai_AI_Laboratory
 cp -r /root/share/temp/model_repos/internlm-chat-7b /root/model/Shanghai_AI_Laboratory
 ```
+
 > -r 选项表示递归地复制目录及其内容
 
 也可以使用 `modelscope` 中的 `snapshot_download` 函数下载模型，第一个参数为模型名称，参数 `cache_dir` 为模型的下载路径。
@@ -122,7 +125,7 @@ model_dir = snapshot_download('Shanghai_AI_Laboratory/internlm-chat-7b', cache_d
 
 > 注意：使用 `pwd` 命令可以查看当前的路径，`JupyterLab` 左侧目录栏显示为 `/root/` 下的路径。
 
-![image](images/image-2.png)
+![image](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-2.png)
 
 ### 2.3 代码准备
 
@@ -142,7 +145,7 @@ git checkout 3028f07cb79e5b1d7342f4ad8d11efad3fd13d17
 
 将 `/root/code/InternLM/web_demo.py` 中 29 行和 33 行的模型更换为本地的 `/root/model/Shanghai_AI_Laboratory/internlm-chat-7b`。
 
-![image-3](images/image-3.png)
+![image-3](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-3.png)
 
 ### 2.4 终端运行
 
@@ -183,7 +186,8 @@ while True:
 ```shell
 python /root/code/InternLM/cli_demo.py
 ```
-![Alt text](images/image-18.png)
+
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-18.png)
 
 ### 2.5 web demo 运行
 
@@ -196,15 +200,15 @@ cd /root/code/InternLM
 streamlit run web_demo.py --server.address 127.0.0.1 --server.port 6006
 ```
 
-![Alt text](images/image-12.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-12.png)
 
 注意：要在浏览器打开 `http://127.0.0.1:6006` 页面后，模型才会加载，如下图所示：
 
-![Alt text](images/image-5.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-5.png)
 
 在加载完模型之后，就可以与 InternLM-Chat-7B 进行对话了，如下图所示：
 
-![Alt text](images/image-6.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-6.png)
 
 ## 3 Lagent 智能体工具调用 Demo
 
@@ -237,6 +241,7 @@ pip install accelerate==0.24.1
 mkdir -p /root/model/Shanghai_AI_Laboratory
 cp -r /root/share/temp/model_repos/internlm-chat-7b /root/model/Shanghai_AI_Laboratory
 ```
+
 > -r 选项表示递归地复制目录及其内容
 
 也可以在 `/root/model` 路径下新建 `download.py` 文件并在其中输入以下内容，并运行 `python /root/model/download.py` 执行下载，模型大小为 14 GB，下载模型大概需要 10~20 分钟
@@ -493,7 +498,7 @@ streamlit run /root/code/lagent/examples/react_web_demo.py --server.address 127.
 
 我们在 `Web` 页面选择 `InternLM` 模型，等待模型加载完毕后，输入数学问题 已知 `2x+3=10`，求`x` ,此时 `InternLM-Chat-7B` 模型理解题意生成解此题的 `Python` 代码，`Lagent` 调度送入 `Python` 代码解释器求出该问题的解。
 
-![Alt text](images/image-7.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-7.png)
 
 ## 4. 浦语·灵笔图文理解创作 Demo
 
@@ -503,7 +508,7 @@ streamlit run /root/code/lagent/examples/react_web_demo.py --server.address 127.
 
 首先在 [InternStudio](https://studio.intern-ai.org.cn/) 上选择 A100(1/4)*2 的配置。如下图所示：
 
-![Alt text](images/image-8.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-8.png)
 
 接下来打开刚刚租用服务器的 `进入开发机`，并在终端输入 `bash` 命令，进入 `conda` 环境，接下来就是安装依赖。
 
@@ -524,6 +529,7 @@ conda activate xcomposer-demo
 ```shell
 pip install transformers==4.33.1 timm==0.4.12 sentencepiece==0.1.99 gradio==3.44.4 markdown2==2.4.10 xlsxwriter==3.1.2 einops accelerate
 ```
+
 ### 4.2 模型下载
 
 [InternStudio](https://studio.intern-ai.org.cn/)平台的 `share` 目录下已经为我们准备了全系列的 `InternLM` 模型，所以我们可以直接复制即可。使用如下命令复制：
@@ -532,6 +538,7 @@ pip install transformers==4.33.1 timm==0.4.12 sentencepiece==0.1.99 gradio==3.44
 mkdir -p /root/model/Shanghai_AI_Laboratory
 cp -r /root/share/temp/model_repos/internlm-xcomposer-7b /root/model/Shanghai_AI_Laboratory
 ```
+
 > -r 选项表示递归地复制目录及其内容
 
 也可以安装 `modelscope`，下载模型的老朋友了
@@ -576,11 +583,11 @@ python examples/web_demo.py  \
 
 [**查看本教程5.2配置本地端口后**](./hello_world.md#52-配置本地端口)，将端口映射到本地。在本地浏览器输入 `http://127.0.0.1:6006` 即可。我们以`又见敦煌`为提示词，体验图文创作的功能，如下图所示：
 
-![Alt text](images/image-9.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-9.png)
 
 接下来，我们可以体验一下图片理解的能力，如下所示~
 
-![Alt text](images/image-10.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-10.png)
 
 ## 5. 通用环境配置
 
@@ -647,10 +654,12 @@ EOF
 首先我们需要配置一下本地的 `SSH Key` ，我们这里以 `Windows` 为例。
 
 步骤①：在本地机器上打开 `Power Shell` 终端。在终端中，运行以下命令来生成 SSH 密钥对：（如下图所示）
+
 ```shell
 ssh-keygen -t rsa
 ```
-![Alt text](images/image-13.png)
+
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-13.png)
 
 步骤②： 您将被提示选择密钥文件的保存位置，默认情况下是在 `~/.ssh/` 目录中。按 `Enter` 键接受默认值或输入自定义路径。
 
@@ -662,15 +671,15 @@ cat ~\.ssh\id_rsa.pub
 
 > `~` 是用户主目录的简写，`.ssh` 是SSH配置文件的默认存储目录，`id_rsa.pub` 是 SSH 公钥文件的默认名称。所以，`cat ~\.ssh\id_rsa.pub` 的意思是查看用户主目录下的 `.ssh` 目录中的 `id_rsa.pub` 文件的内容。
 
-![Alt text](images/image-14.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-14.png)
 
 步骤④：将公钥复制到剪贴板中，然后回到 `InternStudio` 控制台，点击配置 SSH Key。如下图所示：
 
-![Alt text](images/image-15.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-15.png)
 
 步骤⑤：将刚刚复制的公钥添加进入即可。
 
-![Alt text](images/image-16.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-16.png)
 
 步骤⑥：在本地终端输入以下指令 `.6006` 是在服务器中打开的端口，而 `33090` 是根据开发机的端口进行更改。如下图所示：
 
@@ -678,7 +687,7 @@ cat ~\.ssh\id_rsa.pub
 ssh -CNg -L 6006:127.0.0.1:6006 root@ssh.intern-ai.org.cn -p 33090
 ```
 
-![Alt text](images/image-17.png)
+![Alt text](C:\Users\Molly_Lee\mrcat\tutorial\helloworld\images\image-17.png)
 
 ### 5.3 模型下载
 
@@ -753,12 +762,40 @@ download(model_repo='OpenLMLab/InternLM-7b', model_name='InternLM-7b', output='y
 **基础作业：**
 
 - 使用 InternLM-Chat-7B 模型生成 300 字的小故事（需截图）。
+
+  ①使用終端調試：
+
+  ![image-20240215195843980](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215195843980.png)
+
+  ②使用web调试：
+
+  ![image-20240215195640241](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215195640241.png)
+
 - 熟悉 hugging face 下载功能，使用 `huggingface_hub` python 包，下载 `InternLM-20B` 的 config.json 文件到本地（需截图下载过程）。
+
+  ![image-20240215214933953](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215214933953.png)
+
+  
 
 **进阶作业（可选做）**
 
 - 完成浦语·灵笔的图文理解及创作部署（需截图）
+
+  ①web调用：
+
+  ![image-20240215210812421](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215210812421.png)
+
+  ![image-20240215210834264](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215210834264.png)
+
+  ![image-20240215210849199](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215210849199.png)
+
+![image-20240215212220781](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215212220781.png)
+
 - 完成 Lagent 工具调用 Demo 创作部署（需截图）
+
+  ①web調用：
+
+  ![image-20240215204331228](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215204331228.png)
 
 **整体实训营项目：**
 

@@ -144,6 +144,10 @@ python download_hf.py
 
 更多关于镜像使用可以移步至 [HF Mirror](https://hf-mirror.com/) 查看。
 
+![image-20240215215614613](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215215614613.png)
+
+
+
 ### 1.4 下载 NLTK 相关资源
 
 我们在使用开源词向量模型构建开源词向量的时候，需要用到第三方库 `nltk` 的一些资源。正常情况下，其会自动从互联网上下载，但可能由于网络原因会导致下载中断，此处我们可以从国内仓库镜像地址下载相关资源，保存到服务器上。
@@ -294,6 +298,8 @@ vectordb = Chroma.from_documents(
 vectordb.persist()
 ```
 
+![image-20240215233733794](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215233733794.png)
+
 ### 2.4 整体脚本
 
 将上述代码整合在一起为知识库搭建的脚本：
@@ -380,6 +386,8 @@ vectordb.persist()
 ```
 
 可以在 `/root/data` 下新建一个 `demo`目录，将该脚本和后续脚本均放在该目录下运行。运行上述脚本，即可在本地构建已持久化的向量数据库，后续直接导入该数据库即可，无需重复构建。
+
+![image-20240215220716889](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215220716889.png)
 
 ## 3 InternLM 接入 LangChain
 
@@ -634,6 +642,23 @@ demo.launch()
 
 通过将上述代码封装为 run_gradio.py 脚本，直接通过 python 命令运行，即可在本地启动知识库助手的 Web Demo，默认会在 7860 端口运行，接下来将服务器端口映射到本地端口即可访问:
 
+```
+cd /root/code/LangChain
+python web_langchain.py  \
+    --folder /root/model/Shanghai_AI_Laboratory/internlm-xcomposer-7b \
+    --num_gpus 1 \
+    --port 6006
+    
+python web_langchain.py  \
+    --folder /root/data/model/Shanghai_AI_Laboratory/internlm-chat-7b \
+    --num_gpus 1 \
+    --port 6006
+```
+
+
+
+
+
 ![](figures/image-5.png)
 
 此处我们简要介绍如何将服务器端口映射到本地端口：
@@ -686,10 +711,33 @@ ssh -CNg -L 7860:127.0.0.1:7860 root@ssh.intern-ai.org.cn -p 33090
 
 复现课程知识库助手搭建过程 (截图)
 
+①下载预训练模型：
+
+![image-20240215215614613](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215215614613.png)
+
+②构建数据：
+
+![image-20240215233802951](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215233802951.png)
+
+构建LLM：
+
+![image-20240215233604803](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215233604803.png)
+
+④web调用：
+
+![image-20240215234335346](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215234335346.png)
+
+
+
+![image-20240215234531097](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240215234531097.png)
+
+
 
 **进阶作业**：
 
 选择一个垂直领域，收集该领域的专业资料构建专业知识库，并搭建专业问答助手，并在 [OpenXLab](https://openxlab.org.cn/apps) 上成功部署（截图，并提供应用地址）
+
+
 
 **整体实训营项目：**
 

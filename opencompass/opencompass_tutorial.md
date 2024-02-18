@@ -312,7 +312,7 @@ python run.py --models hf_llama_7b --datasets base_medium
 ```
 
 OpenCompass 通常假定运行环境网络是可用的。如果您遇到网络问题或希望在离线环境中运行 OpenCompass，请参阅 [FAQ - 网络 - Q1](https://opencompass.readthedocs.io/zh-cn/latest/get_started/faq.html) 寻求解决方案。
- 
+
 
 ## 可视化评估结果
 
@@ -356,6 +356,14 @@ outputs/default/
 **基础作业**
 
 - 使用 OpenCompass 评测 InternLM2-Chat-7B 模型在 C-Eval 数据集上的性能
+
+  ![image-20240218231637138](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218231637138.png)
+
+  ![image-20240218235011288](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240218235011288.png)
+
+  ![image-20240219000535313](C:\Users\Molly_Lee\AppData\Roaming\Typora\typora-user-images\image-20240219000535313.png)
+
+  
 
 **进阶作业**
 
