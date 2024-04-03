@@ -7,14 +7,19 @@
 - 使用 `InternLM2-Chat-1.8B` 模型生成 300 字的小故事（需截图）
 
 - web 界面
-![Alt text](image-3.png)
+![1.8b小故事](image-3.png)
 
 
 **进阶作业 (优秀学员必做)**
 
 - 熟悉 `huggingface` 下载功能，使用 `huggingface_hub` python 包，下载 `InternLM2-Chat-7B` 的 `config.json` 文件到本地（需截图下载过程）
+![hf](image-8.png)
+
 - 完成 `浦语·灵笔2` 的 `图文创作` 及 `视觉问答` 部署（需截图）
+![灵笔2](image-7.png)
+
 - 完成 `Lagent` 工具调用 `数据分析` Demo 部署（需截图）
+![数据分析](image-6.png)
 
 
 **补充**
